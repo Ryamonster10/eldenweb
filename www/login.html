@@ -96,6 +96,7 @@
         }
         
         </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h2 style="text-align: center">Login</h2>
@@ -108,4 +109,29 @@
   </form>
   <h5 style="text-align: center;">Don't have an account? <a href="/signup">Signup!</a></h5>
 </body>
+<script>
+  $(function() {
+    $('#login-form').submit(function(event) {
+      event.preventDefault(); // Prevent the form from submitting via the browser
+      var email = $('#email').val();
+      var password = $('#password').val();
+      $.ajax({
+        type: 'POST',
+        url: 'http://10.1.1.140:3000/login',
+        data: {
+          email: email,
+          password: password
+        },
+        success: function(response) {
+          console.log(response);
+          // Handle success response here
+        },
+        error: function(error) {
+          console.log(error);
+          // Handle error response here
+        }
+      });
+    });
+  });
+  </script>  
 </html>

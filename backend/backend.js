@@ -1,4 +1,4 @@
-//Copyright 2023, Ryan Stone, All rights reserved.
+// Copyright 2023, Ryan Stone, All rights reserved.
 
 const express = require('express');
 const mysql = require('mysql');
@@ -83,8 +83,44 @@ app.post('/signup', (req, res) => {
     }
   });  
 
+// handle user login request
+app.post('/login', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // find user by email
+  const sql = 'SELECT * FROM users WHERE email = ?';
+  connection.query(sql, email, (error, results, fields) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error retrieving user data from database');
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(401).send('Invalid email or password');
+      return;
+    }
+
+    // compare password hashes
+    const user = results[0];
+    bcrypt.compare(password, user.password, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error comparing password hashes');
+        return;
+      }
+
+      if (result) {
+        res.send({ userId: user.user_id });
+      } else {
+        res.status(401).send('Invalid email or password');
+      }
+    });
+  });
+});
+  
 // start server
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-
