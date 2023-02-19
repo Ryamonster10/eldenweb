@@ -1,0 +1,420 @@
+<!--Copyright 2023, Ryan Stone, All rights reserved.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sign Up</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+body {
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  font-size: 16px;
+  width: 300px;
+}
+
+select {
+  width: 320px;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+select:disabled {
+  background-color: #f2f2f2;
+  color: #ccc;
+  cursor: not-allowed;
+}
+body {
+  background-color: #1f1f1f;
+  color: #f2f2f2;
+  font-family: Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #f2f2f2;
+}
+
+a {
+  color: #4aade4;
+}
+
+a:hover {
+  color: #c6e2ff;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4aade4;
+  color: #f2f2f2;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #c6e2ff;
+}
+
+</style>
+</head>
+<body>
+  <h2 style="text-align: center">Sign Up</h2>
+  <form id="signup-form">
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" name="firstName" required>
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+    <label for="username">Username (Public)</label>
+    <input type="text" id="username" name="username" required>
+    <label for="username">Password</label>
+    <input type="password" id="password" name="password" required>
+    <label for="console">Console</label>
+    <select id="console" name="console">
+      <option vaule="" disabled selected>Select your option</option>
+      <option vaule="PS">Play Station</option>
+      <option vaule="XBOX">Xbox</option>
+      <option vaule="PC">PC</option>
+    </select>
+    <label for="location">Current Location</label>
+    <select id="location" name="location" required>
+      <option value="" disabled selected>Select your option</option>
+      <option value="LIMGRAVE">Limgrave</option>
+      <option value="WEEPING PENINSULA">Weeping Peninsula</option>
+      <option value="LIURNIA OF THE LAKES">Liurnia of the Lakes</option>
+      <option value="CAELID">Caelid</option>
+      <option value="DRAGONBARROW">Dragonbarrow</option>
+      <option value="ALTUS PLATEAU">Altus Plateau</option>
+      <option value="MT. GELMIR">Mt. Gelmir</option>
+      <option value="CAPITAL OUTSKIRTS">Capital Outskirts</option>
+      <option value="LEYNDELL">Leyndell</option>
+      <option value="ROYAL CAPITAL">Royal Capital</option>
+      <option value="MOUNTAINTOPS OF THE GIANTS">Mountaintops of the Giants</option>
+      <option value="CRUMBLING FARUM AZULA">Crumbling Farum Azula</option>
+      <option value="FORBIDDEN LANDS">Forbidden Lands</option>
+      <option value="CONSECRATED SNOWFIELD">Consecrated Snowfield</option>
+      <option value="MIQUELLA'S HALIGTREE">Miquella's Haligtree</option>
+      <option value="SIOFRA RIVER">Siofra River</option>
+      <option value="AINSEL RIVER">Ainsel River</option>
+      <option value="NOKRON ETERNAL CITY">Nokron Eternal City</option>
+      <option value="DEEPROOT DEPTHS">Deeproot Depths</option>
+      <option value="LAKE OF ROT">Lake of Rot</option>
+      <option value="LEYNDELL ASHEN CAPITAL">Leyndell Ashen Capital</option>
+      <option value="ELDEN THRONE">Elden Throne</option>
+    </select>
+    <label for="boss">Current Boss</label>
+    <select id="boss" name="boss" disabled>
+      <option value="" disabled selected>Select your option</option>
+    </select>
+    <input type="submit" value="Submit">
+  </form>
+  <script>
+    let bosses = {
+      "LIMGRAVE": [
+        "Beastman of Farum Azula",
+        "Bell Bearing Hunter",
+        "Black Knife Assassin",
+        "Bloodhound Knight Darriwil",
+        "Crucible Knight",
+        "Deathbird",
+        "Demi-Human Chief",
+        "Erdtree Burial Watchdog (Stormfoot Catacombs)",
+        "Flying Dragon Agheel",
+        "Godrick the Grafted",
+        "Grafted Scion",
+        "Grave Warden Duelist",
+        "Guardian Golem",
+        "Mad Pumpkin Head",
+        "Margit, the Fell Omen",
+        "Night's Cavalry",
+        "Patches",
+        "Soldier of Godrick",
+        "Stonedigger Troll",
+        "Tibia Mariner",
+        "Tree Sentinel",
+        "Ulcerated Tree Spirit"
+      ],
+      "WEEPING PENINSULA": [
+        "Ancient Hero of Zamor",
+        "Cemetery Shade",
+        "Deathbird",
+        "Erdtree Avatar",
+        "Erdtree Burial Watchdog (Impaler's Catacombs)",
+        "Leonine Misbegotten",
+        "Miranda the Blighted Bloom",
+        "Night's Cavalry",
+        "Runebear",
+        "Scaly Misbegotten"
+      ],
+      "LIURNIA OF THE LAKES": [
+        "Adan, Thief of Fire",
+        "Alabaster Lord",
+        "Alecto, Black Knife Ringleader",
+        "Bell Bearing Hunter",
+        "Black Knife Assassin",
+        "Bloodhound Knight",
+        "Bols, Carian Knight",
+        "Cemetery Shade",
+        "Cleanrot Knight",
+        "Crystalian",
+        "Crystalian Spear & Crystalian Staff (Duo)",
+        "Death Rite Bird",
+        "Deathbird",
+        "Erdtree Avatar (Liurnia Northeast)",
+        "Erdtree Avatar (Liurnia Southwest)",
+        "Erdtree Burial Watchdog",
+        "Glintstone Dragon Adula",
+        "Glintstone Dragon Smarag",
+        "Magma Wyrm Makar",
+        "Night's Cavalry (Liurnia North)",
+        "Night's Cavalry (Liurnia South)",
+        "Omenkiller",
+        "Onyx Lord",
+        "Red Wolf of Radagon",
+        "Rennala, Queen of the Full Moon",
+        "Royal Knight Loretta",
+        "Royal Revenant",
+        "Spirit-Caller Snail",
+        "Tibia Mariner",
+        "Tree Sentinel (Duo)",
+        "Wormface"
+      ],
+      "CAELID": [
+        "Cemetery Shade",
+        "Commander O'Neil",
+        "Crucible Knight & Misbegotten Warrior",
+        "Death Rite Bird",
+        "Decaying Ekzykes",
+        "Erdtree Avatar",
+        "Erdtree Burial Watchdog (Duo)",
+        "Fallingstar Beast",
+        "Frenzied Duelist",
+        "Mad Pumpkin Heads",
+        "Magma Wyrm",
+        "Night's Cavalry (Caelid)",
+        "Nox Swordstress & Nox Priest",
+        "Starscourge Radahn"
+      ],
+      "DRAGONBARROW": [
+        "Battlemage Hugues",
+        "Beastman of Farum Azula (Duo)",
+        "Bell Bearing Hunter",
+        "Black Blade Kindred ",
+        "Cleanrot Knight (Duo)",
+        "Elder Dragon Greyoll",
+        "Flying Dragon Greyll",
+        "Godskin Apostle",
+        "Night's Cavalry (Dragonbarrow)",
+        "Putrid Avatar",
+        "Putrid Crystalian Trio",
+        "Putrid Tree Spirit"
+      ],
+      "ALTUS PLATEAU": [
+        "Ancient Dragon Lansseax",
+        "Ancient Hero of Zamor",
+        "Black Knife Assassin (Sage's Cave)",
+        "Black Knife Assassin (Sainted Hero's Grave)",
+        "Crystalian Spear & Crystalian Ringblade",
+        "Demi-Human Queen Gilika",
+        "Elemer of the Briar",
+        "Erdtree Burial Watchdog",
+        "Fallingstar Beast",
+        "Godefroy The Grafted",
+        "Godskin Apostle",
+        "Necromancer Garris",
+        "Night's Cavalry",
+        "Omenkiller & Miranda the Blighted Bloom",
+        "Perfumer Tricia & Misbegotten Warrior",
+        "Sanguine Noble",
+        "Stonedigger Troll",
+        "Tibia Mariner",
+        "Tree Sentinel (Duo)",
+        "Wormface"
+      ],
+      "MT. GELMIR": [
+        "Abductor Virgins (Duo)",
+        "Demi-Human Queen Maggie",
+        "Demi-Human Queen Margot",
+        "Full-Grown Fallingstar Beast",
+        "God-Devouring Serpent / Rykard, Lord of Blasphemy",
+        "Godskin Noble",
+        "Kindred of Rot (Duo)",
+        "Magma Wyrm",
+        "Red Wolf of the Champion",
+        "Ulcerated Tree Spirit"
+      ],
+      "CAPITAL OUTSKIRTS": [
+        "Bell Bearing Hunter",
+        "Crucible Knight & Crucible Knight Ordovis",
+        "Deathbird",
+        "Draconic Tree Sentinel",
+        "Fell Twins",
+        "Grave Warden Duelist",
+        "Onyx Lord",
+      ],
+      "LEYNDELL, ROYAL CAPITAL": [
+        "Esgar, Priest of Blood",
+        "Godfrey, First Elden Lord",
+        "Mohg, the Omen",
+        "Morgott, the Omen King",
+      ],
+      "MOUNTAINTOPS OF THE GIANTS": [
+        "Ancient Hero of Zamor",
+        "Borealis the Freezing Fog",
+        "Commander Niall",
+        "Death Rite Bird",
+        "Erdtree Avatar",
+        "Fire Giant",
+        "Godskin Apostle and Godskin Noble (Spiritcaller Snail)",
+        "Tibia Mariner",
+        "Ulcerated Tree Spirit",
+        "Vyke, Knight of the Roundtable"
+      ],
+      "CRUMBLING FARUM AZULA": [
+        "Beast Clergyman / Maliketh, the Black Blade",
+        "Dragonlord Placidusax",
+        "Godskin Duo"
+      ],
+      "FORBIDDEN LANDS": [
+        "Black Blade Kindred",
+        "Night's Cavalry",
+        "Stray Mimic Tear",
+      ],
+      "CONSECRATED SNOWFIELD": [
+        "Astel, Stars of Darkness",
+        "Death Rite Bird",
+        "Great Wyrm Theodorix",
+        "Misbegotten Crusader",
+        "Night's Cavalry (Duo)",
+        "Putrid Avatar",
+        "Putrid Grave Warden Duelist",
+      ],
+      "MIQUELLA'S HALIGTREE": [
+        "Loretta, Knight of the Haligtree",
+        "Malenia, Blade of Miquella",
+      ],
+      "SIOFRA RIVER": [
+        "Ancestor Spirit",
+        "Dragonkin Soldier",
+        "Mohg, Lord of Blood",
+      ],
+      "AINSEL RIVER": [
+        "Dragonkin Soldier of Nokstella",
+      ],
+      "NOKRON, ETERNAL CITY": [
+        "Mimic Tear",
+        "Regal Ancestor Spirit",
+        "Valiant Gargoyle & Valiant Gargoyle (Twinblade)",
+      ],
+      "DEEPROOT DEPTHS": [
+        "Crucible Knight Siluria",
+        "Fia's Champions",
+        "Lichdragon Fortissax",
+      ],
+      "LAKE OF ROT": [
+        "Astel, Naturalborn of the Void",
+        "Dragonkin Soldier",
+      ],
+      "LEYNDELL, ASHEN CAPITAL": [
+        "Esgar, Priest of Blood",
+        "Godfrey, First Elden Lord (Hoarah Loux)",
+        "Mohg, the Omen",
+        "Sir Gideon Ofnir, the All-Knowing",
+      ],
+      "ELDEN THRONE": [
+        "Radagon of the Golden Order / Elden Beast",
+      ]
+      
+    }
+    
+    $(document).ready(function() {
+      $("#location").change(function() {
+        let selectedLocation = $(this).val();
+        $("#boss").prop("disabled", false);
+        $("#boss").empty();
+        let locationBosses = bosses[selectedLocation];
+        locationBosses.forEach(function(boss) {
+          let option = $("<option>");
+          option.text(boss);
+          option.val(boss);
+          $("#boss").append(option);
+        });
+      });
+    });
+
+  $(document).ready(function() {
+   $("#signup-form").submit(function(event) {
+    event.preventDefault(); // prevent the form from submitting normally
+
+    // get the form data
+    var formData = {
+      firstName: $("#firstName").val(),
+      lastName: $("#lastName").val(),
+      email: $("#email").val(),
+      username: $("#username").val(),
+      password: $("#password").val(),
+      consoleType: $("#console").val(),
+      location: $("#location").val(),
+      boss: $("#boss").val(),
+    };
+
+    // send the data to the server using AJAX
+    $.ajax({
+      type: "POST",
+      url: "http://10.1.1.140:3000/signup", // server-side backend
+      data: formData,
+      success: function() {
+        alert("Sign up successful!");
+      },
+      error: function() {
+        alert("Sign up failed!");
+      }
+    });
+  });
+});
+
+</script>
+</body>
+</html>
