@@ -119,8 +119,27 @@ app.post('/login', (req, res) => {
     });
   });
 });
+
+app.post('/boss', (req, res) => {
+  const userId = req.body.userId;
+
+  // Query the database for the user's boss information
+  pool.query('SELECT Boss FROM User WHERE UserID = ?', [userId], (error, results, fields) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error retrieving boss information');
+    } else {
+      if (results.length > 0) {
+        // Return the boss information for the given user ID
+        res.send(results[0].Boss);
+      } else {
+        res.status(404).send('User not found');
+      }
+    }
+  });
+});
   
-// start server
+// start server on the port in the var above
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

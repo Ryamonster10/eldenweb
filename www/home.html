@@ -189,11 +189,7 @@
       <h1>Sounds Good!</h1>
       <h5>So which boss are you fighting?</h5>
       <select id="location" name="location" required>
-        <option value="" disabled selected>Where are you?</
-          
-        }\
-      }
-      <option>
+        <option value="" disabled selected>Where are you?<option>
         <option value="LIMGRAVE">Limgrave</option>
         <option value="WEEPING PENINSULA">Weeping Peninsula</option>
         <option value="LIURNIA OF THE LAKES">Liurnia of the Lakes</option>
@@ -460,6 +456,28 @@ let bosses = {
 
 function openLobbyForm() {
   document.getElementById("joinlobby").style.display = "block";
+  const userId = 'user-id'; // Replace before PROD / Pull from cookies
+  fetch('/boss', { // REPLACE WITH PORT OF PROD
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  body: JSON.stringify({ userId }),
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Failed to retrieve boss information');
+    }
+    return response.text();
+  })
+  .then((boss) => {
+    const bossElement = document.querySelector('h5 a');
+    bossElement.textContent = boss;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
 }
 
 function closeLobbyForm() {
