@@ -1,12 +1,15 @@
 // Copyright 2023, Ryan Stone, All rights reserved.
 
 const express = require('express');
+const cors = require('cors');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 
 const app = express();
 const port = 3000;
+
+app.use(cors());
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,14 +24,30 @@ const connection = mysql.createConnection({
 
 // handle user registration request
 app.post('/signup', (req, res) => {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const email = req.body.email;
-    const username = req.body.username;
-    const consoleType = req.body.consoleType;
-    const location = req.body.location;
-    const boss = req.body.boss;
-  
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
+  const username = req.body.username;
+  const consoleType = req.body.consoleType;
+  const location = req.body.location;
+  const boss = req.body.boss;
+
+  // Check if email already exists in the database
+  const checkEmailSql = 'SELECT COUNT(*) as count FROM users WHERE email = ?';
+  connection.query(checkEmailSql, [email], (error, results, fields) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error checking email existence in database');
+      return;
+    }
+
+    const count = results[0].count;
+
+    if (count > 0) {
+      res.status(400).send('Email already exists');
+      return;
+    }
+
     // generate unique user_id
     let userId = generateUserId();
     checkUserIdExists(userId, (exists) => {
@@ -36,7 +55,7 @@ app.post('/signup', (req, res) => {
       while (exists) {
         userId = generateUserId();
       }
-  
+
       // hash user's password
       bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
@@ -44,20 +63,21 @@ app.post('/signup', (req, res) => {
           res.status(500).send('Error hashing password');
           return;
         }
-  
+
         // insert user data into database with the unique userId
         const sql = 'INSERT INTO users (user_id, first_name, last_name, email, username, password, console_type, location, boss) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
         const values = [userId, firstName, lastName, email, username, hash, consoleType, location, boss];
-  
+
         connection.query(sql, values, (error, results, fields) => {
           if (error) {
             console.error(error);
+            console.log(error);
+            console.log("There was an error inserting data into databse with user", email);
             res.status(500).send('Error inserting user data into database');
           } else {
             res.sendStatus(200);
-            // REMOVE IN PROD DON'T FORGET, THIS WOULD MESS UP YOUR LOGS!!!!!!
-            console.log("SUCCESS, Remove in PROD")
-          }
+            }
+          });
         });
       });
     });

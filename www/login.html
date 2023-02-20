@@ -123,8 +123,12 @@
           password: password
         },
         success: function(response) {
-          console.log(response);
-          alert("It worked, WIP")
+          // extract the data from the response
+          var data = response.data;
+          // set the cookie
+          document.cookie = "userId=" + data + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+          // redirect to home page
+          location.assign("")
         },
         error: function(error) {
           console.log(error);
