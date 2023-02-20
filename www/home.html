@@ -1,0 +1,484 @@
+<!--Copyright 2023, Ryan Stone, All rights reserved.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+        }
+        
+        h2 {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+        
+        form {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        label {
+          display: block;
+          margin-top: 20px;
+          font-weight: bold;
+        }
+        
+        input, select {
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          margin-top: 10px;
+          font-size: 16px;
+          width: 300px;
+        }
+        
+        select {
+          width: 320px;
+        }
+        
+        input[type="submit"] {
+          background-color: #4CAF50;
+          color: white;
+          cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+          background-color: #3e8e41;
+        }
+        
+        select:disabled {
+          background-color: #f2f2f2;
+          color: #ccc;
+          cursor: not-allowed;
+        }
+        body {
+          background-color: #1f1f1f;
+          color: #f2f2f2;
+          font-family: Arial, sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+          color: #f2f2f2;
+        }
+        
+        a {
+          color: #4aade4;
+        }
+        
+        a:hover {
+          color: #c6e2ff;
+        }
+        
+        .container {
+          width: 80%;
+          margin: 0 auto;
+          padding: 20px;
+        }
+        
+        .btn {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #4aade4;
+          color: #f2f2f2;
+          text-decoration: none;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+          background-color: #c6e2ff;
+        }
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 75%;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #1f1f1f;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Home</h1>
+    <!-- A button to open the popup form -->
+<button class="open-button" onclick="openLobbyForm()">Join Lobbys</button>
+
+<!-- The form -->
+<div class="form-popup" id="joinlobby">
+  <form class="form-container">
+    <h1>Let's Join a Lobby!</h1>
+    <h5>Looks like you are fighing <a>BOSS</a></h5>
+    <button type="submit" class="btn" onclick="contiune()">Look's Right</button>
+    <button type="button" class="btn" onclick="closeForm1()">Nope, Change</button>
+    <button type="button" class="btn cancel" onclick="closeLobbyForm()">Close</button>
+  </form>
+</div>
+<!-- The second form (AKA change boss) -->
+<div class ="form-popup" id="changeBoss"> 
+    <form class="form-container">
+      <h1>Sounds Good!</h1>
+      <h5>So which boss are you fighting?</h5>
+      <select id="location" name="location" required>
+        <option value="" disabled selected>Where are you?</
+          
+        }\
+      }
+      <option>
+        <option value="LIMGRAVE">Limgrave</option>
+        <option value="WEEPING PENINSULA">Weeping Peninsula</option>
+        <option value="LIURNIA OF THE LAKES">Liurnia of the Lakes</option>
+        <option value="CAELID">Caelid</option>
+        <option value="DRAGONBARROW">Dragonbarrow</option>
+        <option value="ALTUS PLATEAU">Altus Plateau</option>
+        <option value="MT. GELMIR">Mt. Gelmir</option>
+        <option value="CAPITAL OUTSKIRTS">Capital Outskirts</option>
+        <option value="LEYNDELL, ROYAL CAPITAL">Leyndell, Royal Capital</option>
+        <option value="MOUNTAINTOPS OF THE GIANTS">Mountaintops of the Giants</option>
+        <option value="CRUMBLING FARUM AZULA">Crumbling Farum Azula</option>
+        <option value="FORBIDDEN LANDS">Forbidden Lands</option>
+        <option value="CONSECRATED SNOWFIELD">Consecrated Snowfield</option>
+        <option value="MIQUELLA'S HALIGTREE">Miquella's Haligtree</option>
+        <option value="SIOFRA RIVER">Siofra River</option>
+        <option value="AINSEL RIVER">Ainsel River</option>
+        <option value="NOKRON, ETERNAL CITY">Nokron Eternal City</option>
+        <option value="DEEPROOT DEPTHS">Deeproot Depths</option>
+        <option value="LAKE OF ROT">Lake of Rot</option>
+        <option value="LEYNDELL, ASHEN CAPITAL">Leyndell  Ashen Capital</option>
+        <option value="ELDEN THRONE">Elden Throne</option>
+      </select>
+      <select id="boss" name="boss" disabled>
+        <option value="" disabled selected>And which boss?</option>
+      </select>
+      <button type="submit" class="btn" onclick="contiune()">Let's Go!</button>
+      <button type="button" class="btn cancel" onclick="closeBossForm()">Close</button>
+    </form>
+</div>
+</body>
+<script>
+let bosses = {
+      "LIMGRAVE": [
+        "Beastman of Farum Azula",
+        "Bell Bearing Hunter",
+        "Black Knife Assassin",
+        "Bloodhound Knight Darriwil",
+        "Crucible Knight",
+        "Deathbird",
+        "Demi-Human Chief",
+        "Erdtree Burial Watchdog (Stormfoot Catacombs)",
+        "Flying Dragon Agheel",
+        "Godrick the Grafted",
+        "Grafted Scion",
+        "Grave Warden Duelist",
+        "Guardian Golem",
+        "Mad Pumpkin Head",
+        "Margit, the Fell Omen",
+        "Night's Cavalry",
+        "Patches",
+        "Soldier of Godrick",
+        "Stonedigger Troll",
+        "Tibia Mariner",
+        "Tree Sentinel",
+        "Ulcerated Tree Spirit"
+      ],
+      "WEEPING PENINSULA": [
+        "Ancient Hero of Zamor",
+        "Cemetery Shade",
+        "Deathbird",
+        "Erdtree Avatar",
+        "Erdtree Burial Watchdog (Impaler's Catacombs)",
+        "Leonine Misbegotten",
+        "Miranda the Blighted Bloom",
+        "Night's Cavalry",
+        "Runebear",
+        "Scaly Misbegotten"
+      ],
+      "LIURNIA OF THE LAKES": [
+        "Adan, Thief of Fire",
+        "Alabaster Lord",
+        "Alecto, Black Knife Ringleader",
+        "Bell Bearing Hunter",
+        "Black Knife Assassin",
+        "Bloodhound Knight",
+        "Bols, Carian Knight",
+        "Cemetery Shade",
+        "Cleanrot Knight",
+        "Crystalian",
+        "Crystalian Spear & Crystalian Staff (Duo)",
+        "Death Rite Bird",
+        "Deathbird",
+        "Erdtree Avatar (Liurnia Northeast)",
+        "Erdtree Avatar (Liurnia Southwest)",
+        "Erdtree Burial Watchdog",
+        "Glintstone Dragon Adula",
+        "Glintstone Dragon Smarag",
+        "Magma Wyrm Makar",
+        "Night's Cavalry (Liurnia North)",
+        "Night's Cavalry (Liurnia South)",
+        "Omenkiller",
+        "Onyx Lord",
+        "Red Wolf of Radagon",
+        "Rennala, Queen of the Full Moon",
+        "Royal Knight Loretta",
+        "Royal Revenant",
+        "Spirit-Caller Snail",
+        "Tibia Mariner",
+        "Tree Sentinel (Duo)",
+        "Wormface"
+      ],
+      "CAELID": [
+        "Cemetery Shade",
+        "Commander O'Neil",
+        "Crucible Knight & Misbegotten Warrior",
+        "Death Rite Bird",
+        "Decaying Ekzykes",
+        "Erdtree Avatar",
+        "Erdtree Burial Watchdog (Duo)",
+        "Fallingstar Beast",
+        "Frenzied Duelist",
+        "Mad Pumpkin Heads",
+        "Magma Wyrm",
+        "Night's Cavalry (Caelid)",
+        "Nox Swordstress & Nox Priest",
+        "Starscourge Radahn"
+      ],
+      "DRAGONBARROW": [
+        "Battlemage Hugues",
+        "Beastman of Farum Azula (Duo)",
+        "Bell Bearing Hunter",
+        "Black Blade Kindred ",
+        "Cleanrot Knight (Duo)",
+        "Elder Dragon Greyoll",
+        "Flying Dragon Greyll",
+        "Godskin Apostle",
+        "Night's Cavalry (Dragonbarrow)",
+        "Putrid Avatar",
+        "Putrid Crystalian Trio",
+        "Putrid Tree Spirit"
+      ],
+      "ALTUS PLATEAU": [
+        "Ancient Dragon Lansseax",
+        "Ancient Hero of Zamor",
+        "Black Knife Assassin (Sage's Cave)",
+        "Black Knife Assassin (Sainted Hero's Grave)",
+        "Crystalian Spear & Crystalian Ringblade",
+        "Demi-Human Queen Gilika",
+        "Elemer of the Briar",
+        "Erdtree Burial Watchdog",
+        "Fallingstar Beast",
+        "Godefroy The Grafted",
+        "Godskin Apostle",
+        "Necromancer Garris",
+        "Night's Cavalry",
+        "Omenkiller & Miranda the Blighted Bloom",
+        "Perfumer Tricia & Misbegotten Warrior",
+        "Sanguine Noble",
+        "Stonedigger Troll",
+        "Tibia Mariner",
+        "Tree Sentinel (Duo)",
+        "Wormface"
+      ],
+      "MT. GELMIR": [
+        "Abductor Virgins (Duo)",
+        "Demi-Human Queen Maggie",
+        "Demi-Human Queen Margot",
+        "Full-Grown Fallingstar Beast",
+        "God-Devouring Serpent / Rykard, Lord of Blasphemy",
+        "Godskin Noble",
+        "Kindred of Rot (Duo)",
+        "Magma Wyrm",
+        "Red Wolf of the Champion",
+        "Ulcerated Tree Spirit"
+      ],
+      "CAPITAL OUTSKIRTS": [
+        "Bell Bearing Hunter",
+        "Crucible Knight & Crucible Knight Ordovis",
+        "Deathbird",
+        "Draconic Tree Sentinel",
+        "Fell Twins",
+        "Grave Warden Duelist",
+        "Onyx Lord",
+      ],
+      "LEYNDELL, ROYAL CAPITAL": [
+        "Esgar, Priest of Blood",
+        "Godfrey, First Elden Lord",
+        "Mohg, the Omen",
+        "Morgott, the Omen King",
+      ],
+      "MOUNTAINTOPS OF THE GIANTS": [
+        "Ancient Hero of Zamor",
+        "Borealis the Freezing Fog",
+        "Commander Niall",
+        "Death Rite Bird",
+        "Erdtree Avatar",
+        "Fire Giant",
+        "Godskin Apostle and Godskin Noble (Spiritcaller Snail)",
+        "Tibia Mariner",
+        "Ulcerated Tree Spirit",
+        "Vyke, Knight of the Roundtable"
+      ],
+      "CRUMBLING FARUM AZULA": [
+        "Beast Clergyman / Maliketh, the Black Blade",
+        "Dragonlord Placidusax",
+        "Godskin Duo"
+      ],
+      "FORBIDDEN LANDS": [
+        "Black Blade Kindred",
+        "Night's Cavalry",
+        "Stray Mimic Tear",
+      ],
+      "CONSECRATED SNOWFIELD": [
+        "Astel, Stars of Darkness",
+        "Death Rite Bird",
+        "Great Wyrm Theodorix",
+        "Misbegotten Crusader",
+        "Night's Cavalry (Duo)",
+        "Putrid Avatar",
+        "Putrid Grave Warden Duelist",
+      ],
+      "MIQUELLA'S HALIGTREE": [
+        "Loretta, Knight of the Haligtree",
+        "Malenia, Blade of Miquella",
+      ],
+      "SIOFRA RIVER": [
+        "Ancestor Spirit",
+        "Dragonkin Soldier",
+        "Mohg, Lord of Blood",
+      ],
+      "AINSEL RIVER": [
+        "Dragonkin Soldier of Nokstella",
+      ],
+      "NOKRON, ETERNAL CITY": [
+        "Mimic Tear",
+        "Regal Ancestor Spirit",
+        "Valiant Gargoyle & Valiant Gargoyle (Twinblade)",
+      ],
+      "DEEPROOT DEPTHS": [
+        "Crucible Knight Siluria",
+        "Fia's Champions",
+        "Lichdragon Fortissax",
+      ],
+      "LAKE OF ROT": [
+        "Astel, Naturalborn of the Void",
+        "Dragonkin Soldier",
+      ],
+      "LEYNDELL, ASHEN CAPITAL": [
+        "Esgar, Priest of Blood",
+        "Godfrey, First Elden Lord (Hoarah Loux)",
+        "Mohg, the Omen",
+        "Sir Gideon Ofnir, the All-Knowing",
+      ],
+      "ELDEN THRONE": [
+        "Radagon of the Golden Order / Elden Beast",
+      ]
+      
+    }
+    
+    $(document).ready(function() {
+      $("#location").change(function() {
+        let selectedLocation = $(this).val();
+        $("#boss").prop("disabled", false);
+        $("#boss").empty();
+        let locationBosses = bosses[selectedLocation];
+        locationBosses.forEach(function(boss) {
+          let option = $("<option>");
+          option.text(boss);
+          option.val(boss);
+          $("#boss").append(option);
+        });
+      });
+    });
+
+function openLobbyForm() {
+  document.getElementById("joinlobby").style.display = "block";
+}
+
+function closeLobbyForm() {
+  document.getElementById("joinlobby").style.display = "none";
+}
+
+function closeBossForm() {
+  document.getElementById("changeBoss").style.display = "none";
+}
+
+function contiune() {
+  //redirect to match making loading
+}
+
+function closeForm1() {
+  document.getElementById("joinlobby").style.display = "none";
+  document.getElementById("changeBoss").style.display = "block";
+}
+
+</script>
+
+</html>
